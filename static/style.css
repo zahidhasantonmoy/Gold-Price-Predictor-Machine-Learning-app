@@ -1,0 +1,286 @@
+/* static/style.css - Modern Futuristic Design */
+
+/* --- Global Resets & Variables --- */
+:root {
+    --primary-font: 'Roboto', sans-serif;
+    --title-font: 'Orbitron', sans-serif;
+    
+    --dark-bg: #1a1a2e; /* Deep space blue/purple */
+    --medium-bg: #162447; /* Slightly lighter for cards */
+    --light-bg: #1f4068;  /* Accent background */
+    
+    --text-primary: #e0e0e0; /* Light grey for main text */
+    --text-secondary: #b0b0b0; /* Softer grey */
+    --text-title: #ffffff;
+    
+    --accent-gold: #ffd700; /* Gold */
+    --accent-cyan: #00e5ff; /* Electric cyan */
+    --accent-glow: rgba(0, 229, 255, 0.5); /* Cyan glow */
+
+    --error-color: #ff4d4d;
+    --success-color: var(--accent-cyan);
+
+    --border-radius-main: 12px;
+    --border-radius-small: 8px;
+    --box-shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.2);
+    --box-shadow-inset: inset 0 2px 4px rgba(0,0,0,0.3);
+    --transition-speed: 0.3s ease;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--primary-font);
+    line-height: 1.7;
+    background: linear-gradient(135deg, var(--dark-bg) 0%, #0d0d1a 100%);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    font-weight: 300;
+}
+
+/* --- Main Layout & Header --- */
+.main-container {
+    width: 100%;
+    max-width: 700px; /* Increased width for better layout */
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.app-header h1 {
+    font-family: var(--title-font);
+    font-size: 2.8em; /* Larger title */
+    color: var(--text-title);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-glow);
+    margin-bottom: 5px;
+}
+
+.app-header .highlight {
+    color: var(--accent-cyan);
+}
+
+.app-header .subtitle {
+    font-size: 1.1em;
+    color: var(--text-secondary);
+    font-weight: 300;
+}
+
+/* --- Content Wrapper & Form --- */
+.content-wrapper {
+    background-color: var(--medium-bg);
+    padding: 30px 40px; /* More padding */
+    border-radius: var(--border-radius-main);
+    box-shadow: var(--box-shadow-soft), 0 0 30px rgba(0, 229, 255, 0.1); /* Added subtle glow */
+    margin-bottom: 30px;
+}
+
+.prediction-form .form-section {
+    margin-bottom: 25px;
+}
+
+.prediction-form .input-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px; /* Reduced margin for grid items */
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    font-size: 0.95em;
+    text-transform: uppercase; /* Uppercase labels for a techy feel */
+    letter-spacing: 0.5px;
+}
+
+input[type="number"],
+.select-wrapper select {
+    width: 100%;
+    padding: 14px 18px; /* Increased padding */
+    background-color: var(--dark-bg);
+    border: 1px solid var(--light-bg);
+    border-radius: var(--border-radius-small);
+    color: var(--text-primary);
+    font-size: 1em;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    box-shadow: var(--box-shadow-inset);
+}
+
+input[type="number"]::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+input[type="number"]:focus,
+.select-wrapper select:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+    box-shadow: var(--box-shadow-inset), 0 0 10px var(--accent-glow);
+}
+
+/* Custom Select Arrow */
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper::after {
+    content: '▼'; /* Or an SVG arrow */
+    font-size: 1em;
+    color: var(--accent-cyan);
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* So it doesn't interfere with select click */
+}
+
+.select-wrapper select {
+    appearance: none; /* Remove default arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 40px; /* Make space for custom arrow */
+}
+
+
+/* --- Buttons --- */
+.btn {
+    display: inline-block;
+    width: 100%;
+    padding: 15px 25px;
+    font-family: var(--title-font); /* Use title font for button */
+    font-size: 1.1em;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    color: var(--dark-bg); /* Dark text on light button */
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-gold) 100%);
+    border: none;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn:hover, .btn:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--accent-glow), 0 0 20px var(--accent-cyan);
+    outline: none;
+}
+
+.btn:active {
+    transform: translateY(0px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+
+/* --- Message Boxes (Results & Errors) --- */
+.message-box {
+    padding: 20px 25px;
+    margin-bottom: 30px;
+    border-radius: var(--border-radius-small);
+    text-align: center;
+    border-left: 5px solid;
+    box-shadow: var(--box-shadow-soft);
+}
+
+.error-box {
+    background-color: rgba(255, 77, 77, 0.1); /* Transparent red */
+    border-color: var(--error-color);
+    color: var(--error-color);
+}
+.error-box p {
+    color: var(--error-color); /* Ensure text color */
+}
+
+.result-box {
+    background-color: rgba(0, 229, 255, 0.05); /* Transparent cyan */
+    border-color: var(--accent-cyan);
+}
+
+.result-box h2 {
+    font-family: var(--title-font);
+    color: var(--accent-cyan);
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.result-box .prediction-value {
+    font-size: 2.2em; /* Prominent prediction */
+    color: var(--text-title);
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-family: var(--title-font);
+}
+
+.result-box .model-used-info {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+
+/* --- Footer --- */
+.app-footer {
+    text-align: center;
+    margin-top: auto; /* Pushes footer to bottom if content is short */
+    padding: 20px 0;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 700px;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .app-header h1 {
+        font-size: 2.2em;
+    }
+    .app-header .subtitle {
+        font-size: 1em;
+    }
+    .content-wrapper {
+        padding: 25px 20px;
+    }
+    .prediction-form .input-grid {
+        grid-template-columns: 1fr; /* Stack inputs on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .app-header h1 {
+        font-size: 1.8em;
+    }
+    .result-box .prediction-value {
+        font-size: 1.8em;
+    }
+    .btn {
+        font-size: 1em;
+        padding: 12px 20px;
+    }
+}

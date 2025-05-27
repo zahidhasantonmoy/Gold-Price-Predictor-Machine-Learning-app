@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Predictor</title>
+    <!-- Link to Google Fonts for a modern font -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="main-container">
+        <header class="app-header">
+            <!-- You could add a logo SVG or image here -->
+            <!-- <img src="{{ url_for('static', filename='logo.svg') }}" alt="Logo" class="logo"> -->
+            <h1>Gold<span class="highlight">Predictor</span></h1>
+            <p class="subtitle">Forecasting Gold's Future Value with AI</p>
+        </header>
+
+        <div class="content-wrapper">
+            {% if error_message %}
+                <div class="message-box error-box">
+                    <p>{{ error_message }}</p>
+                </div>
+            {% endif %}
+
+            {% if prediction_text and not error_message %}
+                <div class="message-box result-box">
+                    <h2>Prediction Result</h2>
+                    <p class="prediction-value">{{ prediction_text.split(':')[-1].strip() }}</p>
+                    <p class="model-used-info">Model: {{ selected_model }}</p>
+                </div>
+            {% endif %}
+
+            <form action="{{ url_for('predict') }}" method="post" class="prediction-form">
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="model">Select Predictive Algorithm:</label>
+                        <div class="select-wrapper">
+                             <select name="model" id="model" required>
+                                {% for model_name in models %}
+                                    <option value="{{ model_name }}" {% if model_name == selected_model %}selected{% endif %}>
+                                        {{ model_name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section input-grid">
+                    <div class="form-group">
+                        <label for="open">Open Price:</label>
+                        <input type="number" step="any" id="open" name="open" placeholder="e.g., 78500" value="{{ open_val if open_val is defined else '' }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="high">High Price:</label>
+                        <input type="number" step="any" id="high" name="high" placeholder="e.g., 78700" value="{{ high_val if high_val is defined else '' }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="low">Low Price:</label>
+                        <input type="number" step="any" id="low" name="low" placeholder="e.g., 78300" value="{{ low_val if low_val is defined else '' }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="volume">Volume:</label>
+                        <input type="number" step="any" id="volume" name="volume" placeholder="e.g., 100" value="{{ volume_val if volume_val is defined else '' }}" required>
+                    </div>
+                </div>
+                
+                <div class="form-action">
+                    <button type="submit" class="btn predict-btn">
+                        <!-- You could add an icon here, e.g., using Font Awesome -->
+                        <!-- <i class="fas fa-cogs"></i>  -->
+                        Analyze & Predict
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <footer class="app-footer">
+            <p>© This application is Developed by Zahid Hasan </p>
+        </footer>
+    </div>
+</body>
+</html>
